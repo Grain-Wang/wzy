@@ -19,6 +19,19 @@ AGENTS.md
 - 接续信息优先级固定为：`AGENTS.md` > 当前仓库文件、测试与实验产物 > `CURRENT.md` > `TRANSCRIPT.md`。
 - 接续摘要不能充当科学证据，过期内容不得覆盖当前仓库事实；重大研究门禁、方向变化或远程提交完成后应同步更新接续包。
 - 禁止把原始 Codex session、认证文件、日志、SQLite 状态库、凭据、机器绝对路径或未经筛选的工具输出写入接续包或 Git。
+
+1.3 paper4 Long-Term Directory Convention
+- `paper4/CURRENT.md` 是 paper4 当前科学状态、研究门禁、核心假设、当前 canary 和下一动作的单一入口；重大科学判断变化后必须同步更新。
+- 文献原文与经许可保存的附件放在 `paper4/literature/papers/`。
+- 单篇文献的结构化阅读笔记放在 `paper4/literature/notes/`。
+- 跨论文综述、技术谱系和系统性文献审计放在 `paper4/literature/surveys/`。
+- 尚在验证的候选研究方向放在 `paper4/ideas/candidates/`；已经否定、放弃或被碰撞淘汰的方向及其原因放在 `paper4/ideas/archived/`。
+- novelty、literature gap、research questions 和阶段科学判断放在 `paper4/analysis/`。
+- baseline 复现与缺陷验证放在 `paper4/experiments/01_baseline/`；最小可证伪实验放在 `paper4/experiments/02_canary/`；候选方法实验放在 `paper4/experiments/03_method/`；消融、鲁棒性、边界和机制诊断放在 `paper4/experiments/04_ablation/`。
+- 可复用算法与实验实现放在 `paper4/src/`，实验配置放在 `paper4/configs/`，自动化测试放在 `paper4/tests/`；实验代码、配置和结果必须分离。
+- 程序直接产生且未经变换的原始输出只放在 `paper4/results/raw/`；由原始输出重建的清洗、聚合或统计数据放在 `paper4/results/processed/`；最终表格和图分别放在 `paper4/results/tables/` 与 `paper4/results/figures/`。原始结果不得和处理后结果混放。
+- 论文 outline、related work、method、experiments 等草稿长期维护在 `paper4/paper/`，不得散落在实验或结果目录。
+- 不再新建语义模糊的 `paper4/steps/` 文件或目录。新文件必须进入最合适的语义目录，不得随意堆放在 `paper4/` 根目录；根目录只保留约定的项目级入口或元数据。
 ---
 2. Scope and Permissions
 - 仅允许读取、创建、修改、执行和删除当前目录及其子目录中的文件。

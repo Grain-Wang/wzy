@@ -6,42 +6,86 @@ AutoResearch 是最外层主仓库、Git 仓库和自主科研工作区，由仓
 
 ## 当前分支：paper4
 
-`paper4` 是一个新初始化的独立研究分支。目前仅依据原 `paper2/` 保留了 [`paper4/`](paper4/) 的目录骨架，没有继承 paper2 的研究内容、实验结果、评审结论或 Paper Candidate 状态。
+`paper4` 当前研究 Query-Aware Dynamic Precision for VLMs。文献与碰撞审计已完成，宽泛的 query-/task-/runtime-aware quantization 已有强近邻；当前保留的收缩方向是 **CIQ-PP: Counterfactual Image--Query Precision Profiles for Hardware-Realistic VLM Inference**。
 
 当前状态：
 
-- 研究方向：尚未确定
-- Research Opportunities：尚未形成
-- Research Opportunity Gate：NOT EVALUATED
-- Paper Candidate Gate：NOT EVALUATED
-- 下一阶段：阅读近期高质量论文，形成并排序最多 5 个通过 Research Opportunity Gate 的候选问题
+- 研究阶段：Research Opportunity
+- 当前决策：CONDITIONAL GO
+- Paper Candidate Gate：FAIL / UNVERIFIED
+- 当前唯一动作：先验证同一图像更换 query 是否显著改变非 KV 模块的量化敏感度和最优硬件 profile
+- 权威状态入口：[`paper4/CURRENT.md`](paper4/CURRENT.md)
 
-## 仓库结构
+## paper4 研究工作区
+
+```text
+paper4/
+├── CURRENT.md
+├── literature/
+│   ├── papers/
+│   ├── notes/
+│   └── surveys/
+├── ideas/
+│   ├── candidates/
+│   └── archived/
+├── analysis/
+│   ├── literature_gap.md
+│   └── novelty_matrix.md
+├── experiments/
+│   ├── 01_baseline/
+│   ├── 02_canary/
+│   ├── 03_method/
+│   └── 04_ablation/
+├── configs/
+├── src/
+├── tests/
+├── results/
+│   ├── raw/
+│   ├── processed/
+│   ├── tables/
+│   └── figures/
+└── paper/
+    ├── outline.md
+    ├── related_work.md
+    ├── method.md
+    └── experiments.md
+```
+
+## 路径用途
 
 | 路径 | 用途 |
 | --- | --- |
 | `AGENTS.md` | 整个仓库的权威研究与执行规则 |
 | `.codex/handoff/` | 脱敏的 Codex 接续资料；使用前必须与当前分支源码和 Git 状态核对 |
 | `tools/` | 通用研究执行工具箱 |
-| `paper4/ideas/` | Research Opportunities 与原始构思 |
-| `paper4/research/` | 文献审计、研究方向与阶段技术 notes |
-| `paper4/steps/` | 门禁、协议、改进记录与可复现研究步骤 |
-| `paper4/experiments/` | 研究代码 |
+| `paper4/CURRENT.md` | paper4 当前科学状态、门禁、canary 和下一动作的单一入口 |
+| `paper4/literature/papers/` | 文献原文与经许可保存的附件 |
+| `paper4/literature/notes/` | 单篇论文的结构化阅读笔记 |
+| `paper4/literature/surveys/` | 跨论文综述、技术谱系与系统性文献审计 |
+| `paper4/ideas/candidates/` | 尚在验证的候选研究方向与机制假设 |
+| `paper4/ideas/archived/` | 已否定、放弃或被碰撞淘汰的方向及原因 |
+| `paper4/analysis/` | literature gap、novelty matrix、research questions 和阶段科学判断 |
+| `paper4/experiments/01_baseline/` | baseline 复现、缺陷验证与公平性检查 |
+| `paper4/experiments/02_canary/` | 最小可证伪 canary 实验协议与执行入口 |
+| `paper4/experiments/03_method/` | 通过 canary 后的候选方法实验 |
+| `paper4/experiments/04_ablation/` | 消融、边界、鲁棒性和机制诊断实验 |
+| `paper4/configs/` | 可复现实验配置；不得存放认证信息 |
+| `paper4/src/` | paper4 可复用算法与实验实现代码 |
 | `paper4/tests/` | 自动化测试 |
-| `paper4/results/` | 可重建结果与汇总 |
-| `paper4/responce_from_reviewer/` | 正式 reviewer rounds 与作者 response |
-| `paper4/configs/` | 可复现实验配置 |
-| `paper4/reference_papers_origin/` | 原始参考文献 |
-| `paper4/reference_papers_processed/` | 可检索的参考文献处理结果 |
+| `paper4/results/raw/` | 运行程序直接产生、未经变换的原始输出 |
+| `paper4/results/processed/` | 可由 raw 结果重建的清洗、聚合或统计数据 |
+| `paper4/results/tables/` | 论文与分析使用的最终表格 |
+| `paper4/results/figures/` | 论文与分析使用的最终图 |
+| `paper4/paper/` | 长期维护的论文 outline、related work、method 和 experiments 草稿 |
 
-空目录通过 `.gitkeep` 纳入版本控制；在目录产生正式文件后可删除对应占位文件。
+实验代码与结果必须分离；原始结果与处理后结果不得混放。空目录通过 `.gitkeep` 纳入版本控制，在目录产生正式文件后可删除相应占位文件。不再使用语义模糊的 `paper4/steps/`；新文件应直接进入最匹配的语义目录。
 
 ## 跨机器继续 paper4
 
 新克隆：
 
 ```bash
-git clone -b paper4 git@github.com:Grain-Wang/AutoResearch.git
+git clone -b paper4 https://github.com/Grain-Wang/wzy.git AutoResearch
 cd AutoResearch
 codex -C .
 ```
