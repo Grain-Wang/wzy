@@ -4,7 +4,7 @@
 
 The primary `paper4` direction is **CIQ-PP: Counterfactual Image–Query Non-KV Precision Profiles for Hardware-Realistic VLM Inference**.
 
-Status: **Research Opportunity / Canary Validation / CONDITIONAL GO.** It is not a Paper Candidate, and no method implementation is authorized by this decision.
+Status: **Research Opportunity / Canary Validation / S1 INCONCLUSIVE.** It is not a Paper Candidate. C01-S2 and method implementation are not authorized.
 
 Backup: **Quantization-Induced Disagreement Rescue**, retained only if the primary direction is falsified or proves operationally unusable.
 
@@ -89,10 +89,12 @@ Run [`C01`](../experiments/02_canary/C01/README.md): a Qwen2-VL-2B same-image mu
 - **Negative:** after implementation/proxy checks, the interaction upper confidence bound is below 5% and the per-query oracle advantage is below 0.5 point and 5% relative loss recovery; or the apparent effect is fully explained by task/length/prompt controls.
 - **Inconclusive:** anything between those thresholds. Permit one prespecified sample expansion or one justified quantization-proxy correction. Do not train a router.
 
+C01-S1 completed on 2026-09-06 with outcome **INCONCLUSIVE**. The exact-byte per-query oracle profile gate passed, but the primary controlled interaction gate failed: partial R² -0.603177, 95% CI [-0.671533, -0.523433], permutation p=0.051. The result authorizes neither S2 nor method work. Only one bounded, preregistered sample expansion may be proposed in a later explicitly authorized round.
+
 ## Backup Direction
 
 If the primary interaction is absent but paired BF16/W4 outputs contain a recoverable error tail, test **Quantization-Induced Disagreement Rescue**: predict “W4 wrong and BF16 correct” and compare with generic entropy/margin at an identical rescue rate. The backup is discarded if it cannot outperform generic confidence after accounting for recomputation.
 
 ## Next Action
 
-The next authorized research task is to implement and run C01 exactly as specified. Do not begin model-scale router training, custom kernels, full benchmark matrices, MoE extensions, or paper build before its gate decision.
+Stop after C01-S1. Do not execute S2 or the backup experiment. The only allowed recommendation is one bounded, preregistered sample expansion using the already valid W4 proxy, subject to new explicit authorization. Do not begin model-scale router training, custom kernels, full benchmark matrices, MoE extensions, or Paper Build.

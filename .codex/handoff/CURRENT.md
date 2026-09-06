@@ -9,9 +9,9 @@
 ## 当前阶段
 
 - 分支：`paper4`。
-- 研究状态：**Research Opportunity / CONDITIONAL GO**；尚未达到 Paper Candidate。
-- C01-S0 integrity smoke test：**PASS**。C01-S1 未运行，科学假设未被检验。
-- 上一阶段方向决策已提交为 `09a613e`；远程 push 被当前工具的远端信任策略阻止，本地提交未丢失。
+- 研究状态：**Research Opportunity / C01-S1 INCONCLUSIVE**；尚未达到 Paper Candidate。
+- C01-S0 integrity smoke test：**PASS**。C01-S1 coarse confirmatory probe：**INCONCLUSIVE**；C01-S2 未获授权、未运行。
+- 方向决策与 S0 已有本地提交；S1 完成后按当前 Git 状态核验。本仓库规则禁止向外部仓库 push，不能把未同步误记为实验失败。
 - paper4 科学状态单一入口：`paper4/CURRENT.md`。
 - 完整文献调研：`paper4/literature/surveys/query_aware_vlm_quantization_literature_review.md`。
 
@@ -32,6 +32,20 @@
 - 修复：真实 Transformers decoder wrapper 路径、cuBLAS 确定性配置硬门禁、GQA nested type metadata 优先级。
 - 剩余关注：S0 小切片 BF16 normalized exact 为 4/32；这不是 S0 gate，但 S1 必须先执行预注册 baseline-validity early stop。
 
+## C01-S1 事实
+
+- S1-A baseline-validity：**PASS**；S1-B W4 proxy dynamic-range：**PASS**，未使用 proxy correction。
+- 模型与 revision 延续 S0。正式 GQA manifest：90 images / 540 questions / 270 repeated image×family cells；SHA-256
+  `6a7d8237438bd1764cb8a9341fdafad0e5d43dbbba448962bdd0f532993a63b0`。
+- BF16 official 60.00%；all-W4 official 59.26%；all-W4 mean ΔNLL 0.032510，mean gold-position JS 0.012857，answer flip 14.07%。
+- 13-group primary controlled interaction partial R² = -0.603177，image-bootstrap 95% CI [-0.671533, -0.523433]，within-image permutation p=0.051，standardized effect size=1.5682。interaction gate **FAIL**。
+- +20% exact-byte budget 下，executed per-query oracle 比最强 global/task/image control 高 4.17 official-score points（95% CI [+0.83,+8.33]）与 264.57 pp relative NLL recovery（95% CI [+101.81,+2442.28]）。profile gate PASS，但 NLL recovery 的小分母使幅度和 CI 很不稳定。
+- same-family / cross-family cosine distance 分别为 0.90654 / 0.93513；bootstrap top-3 median Jaccard 0.500，lower-95% 0.200，exact identity 38.85%。
+- 结果为 **INCONCLUSIVE**：不是 STRONG PASS；也因 oracle headroom 较大而不符合 strict robust NEGATIVE。不能将 oracle headroom 表述为已验证的稳定 image×query interaction。
+- recoverable BF16-correct/W4-wrong tail 为 26/540，覆盖 fine-grained、reasoning、spatial 三类；仅记录 backup 可测试，本轮未运行 backup。
+- 成功 GPU interval 共 1.8090 A800 GPU-hours，peak process allocation 9,074,570,752 bytes；0 次 GPU inference retry。两次 post-processing bug 与一次 random-priority/additive-estimate 字段误标均在复用原始推理输出后修复并测试，未改变 profile choices 或 gate statistics。
+- 报告：`paper4/experiments/02_canary/C01/S1_REPORT.md`；机器摘要：`paper4/results/processed/C01/S1/s1_confirmatory_summary.json`；四张图位于 `paper4/results/figures/C01/`。
+
 ## 文献门禁结论
 
 - 宽泛的 `query-aware dynamic mixed-precision quantization` 已发生直接碰撞，不能声称首次提出。
@@ -47,11 +61,10 @@
 
 ## 唯一下一动作
 
-等待用户明确授权 C01-S1。授权后严格按
-`paper4/experiments/02_canary/C01/README.md` 的已锁定协议执行 coarse confirmatory probe；先检查 BF16 baseline validity 与 W4 proxy dynamic range，再运行完整 S1 条件。不得自行改写 positive / negative / gray-zone 门槛。
+不得执行 C01-S2。按 gray-zone 规则，只能在新一轮明确授权后做一次 bounded、preregistered sample expansion，并继续使用已经通过的 W4 proxy；不能同时改 proxy。如果扩展仍不通过 interaction gate，应 downgrade CIQ-PP。不得训练 router 或启动 backup experiment。
 
 ## 禁止提前扩张
 
-- C01-S1 通过前，不训练复杂 router、不写自定义 kernel、不扩 MoE、不跑完整 benchmark matrix。
+- C01-S1 未 STRONG PASS，不训练复杂 router、不写自定义 kernel、不扩 MoE、不跑完整 benchmark matrix，也不执行 S2。
 - 不能使用“first query-aware quantization”“first task-aware bit allocation”“first prefill/decode asymmetric precision”或简单 token-pruning-plus-quantization 作为 headline novelty。
 - 若 canary 失败，应停止 Direction A，而不是调阈值或包装 measurement paper。

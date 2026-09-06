@@ -1,0 +1,123 @@
+{
+  "analysis": {
+    "bootstrap_replicates": 2000,
+    "cross_validation_folds": 5,
+    "permutation_replicates": 999,
+    "primary_sensitivity": "delta_nll",
+    "prompt_template_control": "constant locked hash",
+    "seed": 20260906,
+    "weighting": "pooled SSE across all 13 groups"
+  },
+  "dataset": {
+    "families_per_image": 3,
+    "image_config": "testdev_balanced_images",
+    "image_count": 90,
+    "instruction_config": "testdev_balanced_instructions",
+    "local_snapshot": "paper4/cache/gqa_snapshot",
+    "minimum_images_per_family": 15,
+    "question_count": 540,
+    "questions_per_cell": 2,
+    "questions_per_image": 6,
+    "repo_id": "lmms-lab/GQA",
+    "revision": "a6e72d6e1b912da88af8b2f9eba05d5ea8ec2dd8",
+    "split": "testdev"
+  },
+  "distribution": {
+    "divergence": "natural-log Jensen-Shannon",
+    "other_mass": true,
+    "support": "BF16-fixed top-k gold-position tokens",
+    "top_k": 32
+  },
+  "gates": {
+    "baseline": {
+      "maximum_empty_rate": 0.01,
+      "maximum_malformed_rate": 0.05,
+      "minimum_adequate_families": 3,
+      "minimum_family_official_score": 0.05,
+      "minimum_finite_nll_rate": 1.0,
+      "minimum_overall_official_score": 0.10
+    },
+    "proxy": {
+      "collapse_minimum_absolute_official_score": 0.05,
+      "collapse_minimum_bf16_retention": 0.20,
+      "no_range_maximum_absolute_nll_change": 0.01,
+      "no_range_maximum_answer_flip_rate": 0.01,
+      "no_range_maximum_js": 0.0001,
+      "no_range_maximum_official_point_change": 0.5
+    }
+  },
+  "inference": {
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 16,
+      "num_beams": 1,
+      "use_cache": true
+    },
+    "instruction": "Answer the question using only the lowercase answer (one word or a short phrase). Do not write a sentence or explanation.",
+    "maximum_well_formed_words": 16
+  },
+  "model": {
+    "attention_implementation": "eager",
+    "dtype": "bfloat16",
+    "max_pixels": 401408,
+    "min_pixels": 200704,
+    "local_snapshot": "paper4/cache/model_snapshot",
+    "processor_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "repo_id": "Qwen/Qwen2-VL-2B-Instruct",
+    "revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "use_fast_image_processor": false
+  },
+  "paths": {
+    "dataset_cache": "paper4/cache/datasets",
+    "figure_output": "paper4/results/figures/C01",
+    "image_directory": "paper4/data/C01/S1/images",
+    "model_cache": "paper4/cache/huggingface",
+    "processed_output": "paper4/results/processed/C01/S1",
+    "raw_output": "paper4/results/raw/C01/S1",
+    "table_output": "paper4/results/tables/C01"
+  },
+  "profiles": {
+    "budget_fractions": [
+      0.05,
+      0.10,
+      0.20
+    ],
+    "construction": "deterministic positive-gain-per-byte sequential W4-to-W8-to-BF16 packing",
+    "execution_image_count": 20,
+    "policies": [
+      "global_static",
+      "per_query_family",
+      "leave_one_query_out_per_image",
+      "per_image_family",
+      "per_query_oracle",
+      "random_equal_byte"
+    ],
+    "seed": 20260906,
+    "w8_gain_fraction": 0.5
+  },
+  "protocol": "C01-S1",
+  "quantizer": {
+    "w4": {
+      "bits": 4,
+      "clipping": "no percentile clipping; integer saturation only",
+      "group_size": 128,
+      "qmax": 7,
+      "qmin": -7,
+      "rounding": "round-to-nearest-even",
+      "scale_dtype": "float32",
+      "symmetric": true
+    },
+    "w8": {
+      "bits": 8,
+      "clipping": "no percentile clipping; integer saturation only",
+      "group_size": 128,
+      "qmax": 127,
+      "qmin": -127,
+      "rounding": "round-to-nearest-even",
+      "scale_dtype": "float32",
+      "symmetric": true
+    }
+  },
+  "seed": 20260906,
+  "stage": "coarse_confirmatory_probe"
+}

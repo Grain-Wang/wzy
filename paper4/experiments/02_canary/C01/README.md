@@ -1,6 +1,6 @@
 # C01 — Same-Image Query × Non-KV Quantization Sensitivity
 
-Status: **Designed, not implemented, not run.**
+Status: **S0 PASS; S1 INCONCLUSIVE; S2 not authorized.**
 
 Decision owner: [`../../../CURRENT.md`](../../../CURRENT.md)
 Direction: [`../../../ideas/main_direction.md`](../../../ideas/main_direction.md)
@@ -346,3 +346,53 @@ Until those fields are populated from real artifacts, C01 provides no positive e
 Full execution report: [`S0_REPORT.md`](S0_REPORT.md). Machine-readable small
 summary: `paper4/results/processed/C01/S0/integrity_summary.json`. Raw model,
 data, cache, sample, and prediction artifacts remain local and are not tracked.
+
+## C01-S1 Execution Record — 2026-09-06
+
+- Outcome: **INCONCLUSIVE**. S1-A baseline validity and S1-B W4 dynamic-range
+  gates both passed; no proxy correction was used.
+- Model and environment: `Qwen/Qwen2-VL-2B-Instruct` revision
+  `895c3a49bc3fa70a340399125c650a463535e71c`; Python 3.12.13, PyTorch
+  2.5.0+cu121, Transformers 4.55.2, CUDA 12.1, one A800 80GB.
+- Frozen GQA manifest: 90 images, 540 questions, and 270 repeated
+  image×family cells. Family counts were fine-grained 170, global 30,
+  reasoning 170, and spatial 170. SHA-256:
+  `6a7d8237438bd1764cb8a9341fdafad0e5d43dbbba448962bdd0f532993a63b0`.
+- BF16 official score was 60.00%. All-W4 official score was 59.26%, mean
+  ΔNLL was 0.032510, mean gold-position JS was 0.012857, and answer-flip rate
+  was 14.07%; the proxy had measurable, non-catastrophic dynamic range.
+- Primary controlled interaction partial R² was -0.603177 with image-bootstrap
+  95% CI [-0.671533, -0.523433]. The within-image permutation p-value was
+  0.051 and its standardized effect size relative to the even-more-negative
+  permutation null was 1.5682. The preregistered interaction gate failed.
+- At the +20% byte budget, the executed per-query oracle exceeded the strongest
+  global/task/image control by 4.17 official-score points (95% CI
+  [+0.83, +8.33]) and 264.57 percentage points of relative NLL recovery
+  (95% CI [+101.81, +2442.28]). The large recovery interval reflects a small
+  held-out all-W4-to-BF16 NLL denominator and must not be treated as stable
+  magnitude evidence.
+- Same-image cosine distance was 0.90654 for 270 same-family pairs and 0.93513
+  for 1,080 cross-family pairs. Bootstrap top-3 ranking stability had median
+  Jaccard 0.500, lower 95% value 0.200, and exact identity rate 38.85%.
+- Leakage/confound audit: one prompt hash, no correctness filtering, no
+  model-output taxonomy, no vision-cache reuse, whole-image grouped CV and
+  bootstrap. Absolute-sensitivity correlations with question length, answer
+  length, and visual-token count were -0.1683, +0.1183, and +0.0038.
+- Scientific interpretation: executed oracle headroom exists, but the
+  preregistered repeated-cell estimator gives no stable image×query-family
+  interaction. Thus the conjunctive STRONG PASS gate fails, while the large
+  oracle headroom prevents the strict robust-NEGATIVE rule from firing.
+- Successful GPU interval was 1.8090 A800 GPU-hours; peak allocation was
+  9,074,570,752 bytes. No GPU inference was retried. Two post-processing bugs
+  (baseline `None` aggregation and NumPy-boolean JSON serialization), plus a
+  mislabeled random-priority/additive-estimate field, were fixed and
+  regression-tested without changing saved inference outputs, profile choices,
+  or gate statistics.
+- Recoverable BF16-correct/W4-wrong tail: 26/540 questions across three
+  families. It is sufficient only to note that the backup rescue direction is
+  testable; no backup experiment was run.
+- Recommendation: **one bounded, preregistered sample expansion only**. Do not
+  run S2, train a router, correct the valid proxy, or enter Paper Build.
+
+Full report: [`S1_REPORT.md`](S1_REPORT.md). Machine summary:
+`paper4/results/processed/C01/S1/s1_confirmatory_summary.json`.

@@ -1,0 +1,90 @@
+{
+  "by_family": {
+    "fine_grained_recognition": {
+      "empty_generation_rate": 0.0,
+      "image_count": 85,
+      "malformed_generation_rate": 0.0,
+      "mean_answer_nll": 0.6606455815421856,
+      "mean_answer_token_length": 1.3352941176470587,
+      "mean_generated_word_count": 1.0411764705882354,
+      "mean_question_token_length": 9.352941176470589,
+      "median_answer_nll": 0.23192881792783737,
+      "normalized_exact": 0.5941176470588235,
+      "official_score": 0.5941176470588235,
+      "sample_count": 170
+    },
+    "global_perception": {
+      "empty_generation_rate": 0.0,
+      "image_count": 15,
+      "malformed_generation_rate": 0.0,
+      "mean_answer_nll": 0.6760137461513902,
+      "mean_answer_token_length": 1.6666666666666667,
+      "mean_generated_word_count": 1.0333333333333334,
+      "mean_question_token_length": 5.566666666666666,
+      "median_answer_nll": 0.6286770701408386,
+      "normalized_exact": 0.43333333333333335,
+      "official_score": 0.43333333333333335,
+      "sample_count": 30
+    },
+    "reasoning": {
+      "empty_generation_rate": 0.0,
+      "image_count": 85,
+      "malformed_generation_rate": 0.0,
+      "mean_answer_nll": 0.30422935561407083,
+      "mean_answer_token_length": 1.0,
+      "mean_generated_word_count": 1.0,
+      "mean_question_token_length": 10.117647058823529,
+      "median_answer_nll": 0.10425535961985588,
+      "normalized_exact": 0.7588235294117647,
+      "official_score": 0.7588235294117647,
+      "sample_count": 170
+    },
+    "spatial_relation": {
+      "empty_generation_rate": 0.0,
+      "image_count": 85,
+      "malformed_generation_rate": 0.0,
+      "mean_answer_nll": 0.8957508625284605,
+      "mean_answer_token_length": 1.423529411764706,
+      "mean_generated_word_count": 1.0529411764705883,
+      "mean_question_token_length": 9.488235294117647,
+      "median_answer_nll": 0.6112713813781738,
+      "normalized_exact": 0.4764705882352941,
+      "official_score": 0.4764705882352941,
+      "sample_count": 170
+    }
+  },
+  "candidate_manifest_sha256": "6a7d8237438bd1764cb8a9341fdafad0e5d43dbbba448962bdd0f532993a63b0",
+  "checks": {
+    "empty_rate": true,
+    "family_dynamic_range": true,
+    "finite_nll_rate": true,
+    "malformed_rate": true,
+    "overall_official_score": true
+  },
+  "gpu_elapsed_seconds": 366.81180906295776,
+  "gpu_hours": 0.10189216918415493,
+  "model": {
+    "loaded_config_commit_hash": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "processor_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "repo_id": "Qwen/Qwen2-VL-2B-Instruct",
+    "revision": "895c3a49bc3fa70a340399125c650a463535e71c"
+  },
+  "module_manifest_sha256": "db080e473fb6f9fa4204b1372ace0a5793644a71f41566a99b1847f696e705f6",
+  "outcome": "PASS",
+  "overall": {
+    "empty_generation_rate": 0.0,
+    "image_count": 90,
+    "malformed_generation_rate": 0.0,
+    "mean_answer_nll": 0.6233088857980437,
+    "mean_answer_token_length": 1.275925925925926,
+    "mean_generated_word_count": 1.0314814814814814,
+    "mean_question_token_length": 9.425925925925926,
+    "median_answer_nll": 0.25513431429862976,
+    "normalized_exact": 0.6,
+    "official_score": 0.6,
+    "sample_count": 540
+  },
+  "peak_gpu_memory_bytes": null,
+  "reused_completed_output_after_postprocessing_failure": true,
+  "stage": "S1-A"
+}

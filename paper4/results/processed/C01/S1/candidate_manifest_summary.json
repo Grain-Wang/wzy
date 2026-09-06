@@ -1,0 +1,32 @@
+{
+  "family_image_counts": {
+    "fine_grained_recognition": 85,
+    "global_perception": 15,
+    "reasoning": 85,
+    "spatial_relation": 85
+  },
+  "family_question_counts": {
+    "fine_grained_recognition": 170,
+    "global_perception": 30,
+    "reasoning": 170,
+    "spatial_relation": 170
+  },
+  "image_count": 90,
+  "image_dataset_fingerprint": "5b47e7310f344815",
+  "instruction_dataset_fingerprint": "95116abd32a6b6dc",
+  "manifest_sha256": "6a7d8237438bd1764cb8a9341fdafad0e5d43dbbba448962bdd0f532993a63b0",
+  "outcome": "CANDIDATE MANIFEST FROZEN",
+  "post_hoc_filtering": false,
+  "preprocessing": {
+    "image_mode": "RGB",
+    "max_pixels": 401408,
+    "min_pixels": 200704,
+    "model_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "processor_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "serialized_image_format": "PNG",
+    "use_fast_image_processor": false
+  },
+  "question_count": 540,
+  "repeated_image_family_cells": 270,
+  "selection_uses_model_outputs": false
+}

@@ -2,7 +2,7 @@
 
 Date: 2026-09-05
 
-Status: **Research Opportunity decision complete; Canary Validation only.** No model experiment or hardware result exists in the repository, so none of the directions below has passed the Paper Candidate gate.
+Status: **Research Opportunity decision complete; C01-S1 INCONCLUSIVE.** S0 and S1 results now exist, but the controlled interaction gate did not pass; none of the directions below has passed the Paper Candidate gate. See [`S1_REPORT.md`](../experiments/02_canary/C01/S1_REPORT.md).
 
 ## 1. Evidence Basis and Repository Reconciliation
 
@@ -12,7 +12,7 @@ The repository facts are internally consistent on the scientific status:
 
 - The broad phrase and mechanism of query-aware dynamic mixed-precision quantization are already occupied by close work.
 - No located work provides a controlled same-image/different-query intervention across non-KV VLM modules.
-- `paper4/results/` contains no result artifact beyond placeholders. Statements in the survey, `CURRENT.md`, and handoff are literature-backed hypotheses, not experimental findings from this project.
+- At direction-selection time, `paper4/results/` contained no scientific result artifact. The later C01-S1 result is mixed: executed oracle headroom exists, while the preregistered controlled interaction partial R² is negative. It does not retrospectively turn the direction-selection rationale into experimental evidence.
 - Existing paper files are pre-candidate scaffolds. They do not authorize Paper Build.
 - The earlier canary description mixed a scientific sensitivity test with “measured-cost profile regret.” C01 below deliberately uses an exact resident-weight-byte budget as a diagnostic proxy. It makes no latency claim. A real A800 backend gate is required later, but only if C01 passes.
 - The literature documents a gray zone between a strong continuation threshold (1.5 absolute score points) and a stop threshold (0.5 points). This decision makes that zone explicit as **INCONCLUSIVE**, rather than selecting whichever threshold favors the direction.
