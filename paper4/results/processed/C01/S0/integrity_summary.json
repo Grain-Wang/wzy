@@ -1,0 +1,32 @@
+{
+  "dataset_bytes": 75537176,
+  "dataset_snapshot_bytes": 67738081,
+  "gpu_hours": 0.06808649968614595,
+  "image_count": 8,
+  "integrity_tests": {
+    "all_w4_application": true,
+    "bf16_repeatability": true,
+    "data_leakage_check": true,
+    "empty_group_identity": true,
+    "evaluator_correctness": true,
+    "manifest_frozen_before_quantization": true,
+    "restore_identity": true,
+    "same_image_grouping": true,
+    "single_group_isolation": true,
+    "teacher_forced_nll": true,
+    "vision_cache_equivalence": true
+  },
+  "model_cache_bytes": 4496741243,
+  "outcome": "PASS",
+  "peak_gpu_memory_bytes": 5193116160,
+  "query_family_counts": {
+    "fine_grained_recognition": 10,
+    "global_perception": 4,
+    "reasoning": 6,
+    "spatial_relation": 12
+  },
+  "raw_artifact_bytes": 259865,
+  "recommendation": "ENTER S1 (not executed)",
+  "sample_count": 32,
+  "sample_manifest_sha256": "cfea83045278c17d8f1428b381ef1bee181fc69bf3a128ef41165b38ec3bdc05"
+}

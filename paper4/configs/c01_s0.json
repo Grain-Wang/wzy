@@ -1,0 +1,57 @@
+{
+  "dataset": {
+    "image_config": "testdev_balanced_images",
+    "image_count": 8,
+    "instruction_config": "testdev_balanced_instructions",
+    "local_snapshot": "paper4/cache/gqa_snapshot",
+    "question_count": 32,
+    "repo_id": "lmms-lab/GQA",
+    "revision": "a6e72d6e1b912da88af8b2f9eba05d5ea8ec2dd8",
+    "split": "testdev"
+  },
+  "inference": {
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 16,
+      "num_beams": 1,
+      "use_cache": true
+    },
+    "instruction": "Answer the visual question with a single short phrase."
+  },
+  "model": {
+    "attention_implementation": "eager",
+    "dtype": "bfloat16",
+    "max_pixels": 401408,
+    "min_pixels": 200704,
+    "local_snapshot": "paper4/cache/model_snapshot",
+    "processor_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "repo_id": "Qwen/Qwen2-VL-2B-Instruct",
+    "revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "use_fast_image_processor": false
+  },
+  "paths": {
+    "dataset_cache": "paper4/cache/datasets",
+    "image_directory": "paper4/data/C01/S0/images",
+    "model_cache": "paper4/cache/huggingface",
+    "processed_output": "paper4/results/processed/C01/S0",
+    "raw_output": "paper4/results/raw/C01/S0"
+  },
+  "protocol": "C01-S0",
+  "quantizer": {
+    "bits": 4,
+    "clipping": "no percentile clipping; integer saturation only",
+    "group_size": 128,
+    "qmax": 7,
+    "qmin": -7,
+    "rounding": "round-to-nearest-even",
+    "scale_dtype": "float32",
+    "symmetric": true
+  },
+  "s0": {
+    "nll_repeatability_atol": 1e-06,
+    "repeatability_case_count": 4,
+    "single_group_id": "decoder.q1.attention"
+  },
+  "seed": 20260906,
+  "stage": "integrity_smoke_test"
+}

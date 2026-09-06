@@ -1,6 +1,6 @@
 # Current Research Status
 
-Last updated: 2026-09-05
+Last updated: 2026-09-06
 
 ## Main Direction
 
@@ -14,9 +14,9 @@ Literature audit: [`literature/surveys/query_aware_vlm_quantization_literature_r
 
 ## Current Stage
 
-**Canary Validation.** Literature, gap, collision, and idea-selection gates are complete. C01 is designed but has not been implemented or run. The project remains a Research Opportunity and has **not** reached the Paper Candidate gate.
+**Canary Validation.** Literature, gap, collision, and idea-selection gates are complete. C01-S0 has been implemented and passed all registered integrity checks on 8 GQA images / 32 questions. C01-S1 has **not** been run. The project remains a Research Opportunity and has **not** reached the Paper Candidate gate.
 
-No scientific result exists in `paper4/results/`; current support is literature-based only.
+`paper4/results/` now contains only S0 infrastructure evidence. S0 does not test the image-query sensitivity hypothesis, oracle headroom, quality gain, or hardware benefit; current scientific support for the hypothesis remains literature-based only.
 
 ## Core Hypothesis
 
@@ -55,6 +55,10 @@ The project must not claim to be the first query-aware, task-aware, or runtime m
 
 **C01 — Same-Image Query × Non-KV Quantization Sensitivity**, specified at [`experiments/02_canary/C01/README.md`](experiments/02_canary/C01/README.md).
 
+- S0 status: **PASS**. All integrity checks passed; frozen manifest SHA-256 is `cfea83045278c17d8f1428b381ef1bee181fc69bf3a128ef41165b38ec3bdc05`. See [`experiments/02_canary/C01/S0_REPORT.md`](experiments/02_canary/C01/S0_REPORT.md).
+- S0 scope: Qwen2-VL-2B-Instruct revision `895c3a49bc3fa70a340399125c650a463535e71c`, 8 GQA images / 32 questions, 13 runtime-discovered groups, diagnostic W4A16, and 0.0681 measured A800 GPU-hour for the successful run.
+- S0 interpretation: infrastructure is credible enough to request S1; no CIQ-PP scientific claim has been tested.
+
 - Model: Qwen2-VL-2B-Instruct.
 - Confirmatory data: 80–100 GQA images with replicated image×query-family cells / 480–600 pairs; VQAv2 and TextVQA only as bounded replication slices.
 - Conditions: BF16, static W4A16, single-group W4 perturbation, and equal-byte W8/BF16 restoration from W4.
@@ -67,7 +71,9 @@ C01 uses resident bytes as a diagnostic resource proxy and makes no latency clai
 
 ## Current Decision
 
-**CONDITIONAL GO — C01 only.**
+**CONDITIONAL GO — C01-S1 only, after explicit authorization.**
+
+C01-S0 passed the infrastructure gate. This does not change the preregistered C01 positive, negative, or gray-zone thresholds and does not satisfy the Paper Candidate gate.
 
 - Strong pass requires a controlled interaction partial \(R^2\) of at least 10% with 95% lower bound above 5%, plus at least 1.5 score percentage points and 15 percentage points of relative NLL recovery over the best non-query equal-byte control, replicated across two adequate query families or an independent same-image slice.
 - Negative requires, after integrity/proxy checks, an interaction 95% upper bound below 5% and oracle advantage below both 0.5 point and 5% relative NLL recovery, or complete explanation by task/length/prompt controls.
@@ -79,4 +85,4 @@ Paper Candidate Gate: **FAIL / UNVERIFIED**.
 
 ## Next Action
 
-On the next authorized task, implement and run only C01 from its locked protocol. Do not train a router, write custom kernels, expand to MoE, run a full benchmark matrix, or begin Paper Build before C01 passes.
+Wait for explicit authorization before running C01-S1. When authorized, begin with the locked BF16 baseline-validity and W4 proxy-dynamic-range checks; the tiny S0 slice had only 4/32 BF16 normalized-exact matches, which is not an S0 failure but is a prespecified S1 validity concern. Do not train a router, write custom kernels, expand to MoE, run a full benchmark matrix, execute S2, or begin Paper Build.

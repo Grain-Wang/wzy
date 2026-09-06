@@ -1,0 +1,12 @@
+accelerate==1.10.1
+black==25.1.0
+datasets==4.0.0
+huggingface-hub==0.36.0
+numpy==2.5.1
+Pillow==12.3.0
+pytest==8.4.1
+ruff==0.12.7
+safetensors==0.8.0
+tokenizers==0.21.4
+torch==2.5.0+cu121
+transformers==4.55.2

@@ -309,3 +309,40 @@ After execution, record without changing the prespecified thresholds:
 - Next gate:
 
 Until those fields are populated from real artifacts, C01 provides no positive evidence.
+
+## C01-S0 Execution Record — 2026-09-06
+
+- Outcome: **PASS**; this is an infrastructure result only and provides no
+  evidence for the CIQ-PP scientific hypothesis.
+- Model: `Qwen/Qwen2-VL-2B-Instruct`, revision
+  `895c3a49bc3fa70a340399125c650a463535e71c`, BF16, Transformers 4.55.2,
+  PyTorch 2.5.0+cu121, CUDA 12.1.
+- Data: GQA balanced test-dev, 8 images / 32 questions; query-family counts are
+  global 4, fine-grained 10, spatial 12, and reasoning 6.
+- Frozen sample manifest SHA-256:
+  `cfea83045278c17d8f1428b381ef1bee181fc69bf3a128ef41165b38ec3bdc05`.
+- Quantizer: diagnostic symmetric RTN W4A16, 128 weights per FP32 scale,
+  integer range [-7, 7], no percentile clipping; activations and KV remain BF16.
+- Module manifest: 13 runtime-discovered groups, 326 eligible tensors; SHA-256
+  `db080e473fb6f9fa4204b1372ace0a5793644a71f41566a99b1847f696e705f6`.
+- Integrity checks: BF16 repeatability, empty-group identity, single-group
+  isolation, exact restore, all-W4 application, evaluator, answer-only NLL,
+  same-image grouping, precision-safe vision cache, manifest freeze, and
+  leakage checks all passed.
+- Successful measured GPU time: 0.0681 A800 GPU-hour; conservative cumulative
+  total including two early implementation-gate failures was below 0.10 hour.
+- Peak process allocation: 5,193,116,160 bytes. Full remote workspace including
+  isolated environment and public assets: 11.69 GB; raw/processed result payload
+  remained below 0.3 MB.
+- Bugs repaired before PASS: actual Transformers decoder wrapper discovery,
+  mandatory deterministic cuBLAS workspace configuration, and GQA nested type
+  metadata precedence.
+- Remaining concern: BF16 normalized exact was 4/32 on this tiny non-scientific
+  smoke slice; S1 must apply its baseline-validity early stop before sensitivity
+  interpretation.
+- Recommendation: **ENTER S1 only after explicit authorization. S1 was not
+  executed.**
+
+Full execution report: [`S0_REPORT.md`](S0_REPORT.md). Machine-readable small
+summary: `paper4/results/processed/C01/S0/integrity_summary.json`. Raw model,
+data, cache, sample, and prediction artifacts remain local and are not tracked.
