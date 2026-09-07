@@ -72,6 +72,29 @@ def run_s1_inference_case(
         instruction=instruction,
         device=device,
     )
+    return run_s1_prepared_case(
+        model,
+        processor,
+        prompt_inputs=prompt_inputs,
+        answer=answer,
+        generation_settings=generation_settings,
+        distribution_top_k=distribution_top_k,
+        bf16_reference=bf16_reference,
+    )
+
+
+@torch.inference_mode()
+def run_s1_prepared_case(
+    model: torch.nn.Module,
+    processor: Any,
+    *,
+    prompt_inputs: dict[str, torch.Tensor],
+    answer: str,
+    generation_settings: dict[str, Any],
+    distribution_top_k: int,
+    bf16_reference: FixedSupportDistribution | None,
+) -> S1InferenceResult:
+    """Evaluate generation, answer NLL, and JS from prepared prompt tensors."""
     prediction = generate_answer(model, processor, prompt_inputs, generation_settings)
     full_inputs, labels, prompt_length = append_answer_labels(
         prompt_inputs, tokenizer=processor.tokenizer, answer=answer

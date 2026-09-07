@@ -1,0 +1,17 @@
+{
+  "candidate_questions_checked": 12578,
+  "primary_dataset": "GQA testdev balanced instructions",
+  "grounded_questions_verified": 0,
+  "grounded_success_rate": 0.0,
+  "irrelevant_control_success_rate": 0.0,
+  "usable_questions": 0,
+  "usable_images": 0,
+  "families_covered": [],
+  "per_family_counts": {},
+  "median_area_mismatch": null,
+  "center_edge_confound": "unverified",
+  "main_failure_mode": "official GQA scene-graph/bounding-box archive unavailable and incomplete download",
+  "decision": "DATASET PIVOT",
+  "c02_authorized": false,
+  "gpu_executed": false
+}

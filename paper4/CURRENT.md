@@ -4,7 +4,9 @@ Last updated: 2026-09-06
 
 ## Main Direction
 
-**CIQ-PP: Counterfactual Image–Query Non-KV Precision Profiles for Hardware-Realistic VLM Inference.**
+**CausalQuant-VL: Counterfactual Cross-Modal Dependency Preservation for Quantized Vision-Language Models.**
+
+CIQ-PP is archived as negative-leaning inconclusive after failed controlled interaction validation and infeasible bounded expansion. CausalQuant-VL is a new Research Opportunity / Canary Design only; no method implementation is authorized.
 
 The broad phrase “query-aware dynamic quantization” is not the contribution. The selected opportunity asks whether changing only the query for a fixed image changes the useful non-KV VLM sensitivity profile, and—only if that fact is validated—whether the interaction can support at most 3–4 resident, prepacked, hardware-native profiles.
 
@@ -14,7 +16,7 @@ Literature audit: [`literature/surveys/query_aware_vlm_quantization_literature_r
 
 ## Current Stage
 
-**Canary Validation — S1 INCONCLUSIVE.** Literature, gap, collision, and idea-selection gates are complete. C01-S0 passed all integrity checks, and the authorized C01-S1 coarse confirmatory probe completed on 90 GQA images / 540 questions. S1-A baseline validity and S1-B W4 proxy dynamic range passed, but the preregistered controlled interaction gate failed. The project remains a Research Opportunity and has **not** reached the Paper Candidate gate.
+**Direction Audit — CausalQuant-VL CONDITIONAL GO.** C01/CIQ-PP is archived; C02 is designed but not run. The project remains a Research Opportunity and has **not** reached the Paper Candidate gate.
 
 S1 found executed equal-byte per-query oracle headroom, but did not validate a stable repeated-cell image×query-family interaction. No latency, hardware benefit, deployable routing, or method claim has been established.
 
@@ -75,7 +77,7 @@ C01 uses resident bytes as a diagnostic resource proxy and makes no latency clai
 
 ## Current Decision
 
-**HOLD — C01-S1 INCONCLUSIVE; S2 NOT AUTHORIZED.**
+**Dataset Feasibility PASS — RefCOCOg / C02 eligible.** A local Python 3.12.14 + pyarrow 25.0.0 run parsed 5,000 refs / 9,606 sentence expressions. Grounding consistency was 100% and deterministic irrelevant controls succeeded for 81.12%; no GPU inference was run.
 
 C01-S0 passed the infrastructure gate and C01-S1 completed without changing the preregistered criteria. S1 failed the conjunctive STRONG PASS gate because controlled interaction partial R² was negative. It does not meet robust NEGATIVE because the executed per-query oracle retained substantial equal-byte headroom. This does not satisfy the Paper Candidate gate.
 
@@ -89,4 +91,4 @@ Paper Candidate Gate: **FAIL / UNVERIFIED**.
 
 ## Next Action
 
-Do not execute C01-S2. The only scientifically allowed recommendation is **one bounded, preregistered sample expansion** using the already valid W4 proxy and frozen definitions; it requires a new explicit authorization. If that expansion remains in the gray zone or confirms the absent interaction, downgrade CIQ-PP rather than entering method development. The 26/540 BF16-correct/W4-wrong tail supports only recording that Quantization-Induced Disagreement Rescue is testable; do not start it. Do not train a router, write custom kernels, run a full benchmark matrix, or begin Paper Build.
+Next action: C02 may be run only under explicit authorization. Do not start it automatically; no method implementation or Paper Build.

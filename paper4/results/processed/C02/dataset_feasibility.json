@@ -1,0 +1,8 @@
+{
+  "decision": "NO-GO",
+  "refcoco": {"expressions_reported": 142209, "images_reported": 19994, "grounded_bbox_rate": 1.0, "usable_expressions": null, "usable_images": null, "irrelevant_control_success": null, "area_mismatch": null},
+  "refcocog": {"expressions_reported": 85474, "images_reported": 26711, "grounded_bbox_rate": 1.0, "usable_expressions": null, "usable_images": null, "irrelevant_control_success": null, "area_mismatch": null},
+  "reason": "annotation-scale facts are documented, but sample-level irrelevant-region feasibility and confound statistics could not be computed in the bounded metadata-only run",
+  "c02_authorized": false,
+  "gpu_executed": false
+}

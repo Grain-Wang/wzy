@@ -1,0 +1,10 @@
+metric,value
+expressions_parsed,5000
+grounded_rate,0.1726
+irrelevant_control_success_rate,0.5075318656
+stage_a_exact_shape_success,438
+stage_b_relaxed_success,0
+median_area_mismatch,0.0
+p90_area_mismatch,0.0
+multiple_expression_images,18
+multiple_expression_objects,0

@@ -1,0 +1,88 @@
+{
+  "budget": {
+    "maximum_gpu_hours": 0.5
+  },
+  "counterfactual": {
+    "border_ring_width": 5,
+    "operator": "per-channel median of the exterior border ring",
+    "rasterization": "round x/y/width/height; half-open integer rectangle"
+  },
+  "dataset": {
+    "coco_image_base_url": "https://images.cocodataset.org/train2014",
+    "name": "RefCOCOg",
+    "selection_source": "already-validated usable records v2"
+  },
+  "distribution": {
+    "divergence": "natural-log Jensen-Shannon",
+    "other_mass": true,
+    "support": "BF16-original fixed top-k gold-position tokens",
+    "top_k": 32
+  },
+  "gates": {
+    "bf16_original": {
+      "maximum_empty_rate": 0.0,
+      "maximum_malformed_rate": 0.1,
+      "maximum_prediction_words": 3,
+      "minimum_accuracy": 0.5
+    }
+  },
+  "inference": {
+    "generation": {
+      "do_sample": false,
+      "max_new_tokens": 8,
+      "num_beams": 1,
+      "use_cache": true
+    }
+  },
+  "integrity": {
+    "nll_repeatability_atol": 1e-06,
+    "repeatability_case_count": 2
+  },
+  "model": {
+    "attention_implementation": "eager",
+    "dtype": "bfloat16",
+    "local_snapshot": "paper4/cache/model_snapshot",
+    "max_pixels": 401408,
+    "min_pixels": 200704,
+    "processor_revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "repo_id": "Qwen/Qwen2-VL-2B-Instruct",
+    "revision": "895c3a49bc3fa70a340399125c650a463535e71c",
+    "use_fast_image_processor": false
+  },
+  "paths": {
+    "counterfactual_directory": "paper4/results/raw/C02/S0/counterfactuals",
+    "figure_output": "paper4/results/figures/C02/S0_sanity",
+    "image_directory": "paper4/data/C02/S0/images",
+    "manifest": "paper4/results/processed/C02/S0/sample_manifest.jsonl",
+    "model_cache": "paper4/cache/huggingface",
+    "processed_output": "paper4/results/processed/C02/S0",
+    "raw_output": "paper4/results/raw/C02/S0",
+    "source_parquet": "paper4/cache/refcocog/train.parquet",
+    "usable_records": "paper4/results/processed/C02/refcocog_records_v2.jsonl"
+  },
+  "protocol": "C02-S0",
+  "quantizer": {
+    "bits": 4,
+    "clipping": "no percentile clipping; integer saturation only",
+    "group_size": 128,
+    "qmax": 7,
+    "qmin": -7,
+    "rounding": "round-to-nearest-even",
+    "scale_dtype": "float32",
+    "symmetric": true
+  },
+  "seed": 20260907,
+  "selection": {
+    "expressions_per_family": 8,
+    "expressions_per_image": 2,
+    "image_count": 16,
+    "require_literal_coco_category": true,
+    "require_relevant_irrelevant_non_overlap": true
+  },
+  "stage": "integrity_smoke_test",
+  "task": {
+    "corrected_prompt_template": "Look carefully at the image. What object is referred to by: <expression>? Answer with exactly one COCO object category name and no other words.",
+    "prompt_template": "What object is referred to by: <expression>? Answer with the object category only.",
+    "target": "COCO category name"
+  }
+}

@@ -70,12 +70,17 @@ def build_messages(
     image: Image.Image, question: str, instruction: str
 ) -> list[dict[str, Any]]:
     """Build the locked one-turn Qwen chat message."""
+    return build_text_messages(image, f"{instruction}\nQuestion: {question}")
+
+
+def build_text_messages(image: Image.Image, prompt: str) -> list[dict[str, Any]]:
+    """Build a one-turn Qwen chat message from an exact text prompt."""
     return [
         {
             "role": "user",
             "content": [
                 {"type": "image", "image": image},
-                {"type": "text", "text": f"{instruction}\nQuestion: {question}"},
+                {"type": "text", "text": prompt},
             ],
         }
     ]
@@ -91,6 +96,28 @@ def prepare_prompt_inputs(
 ) -> dict[str, torch.Tensor]:
     """Apply the locked model chat template and move tensors to one device."""
     messages = build_messages(image, question, instruction)
+    return prepare_messages_inputs(processor, messages=messages, device=device)
+
+
+def prepare_text_prompt_inputs(
+    processor: Any,
+    *,
+    image: Image.Image,
+    prompt: str,
+    device: torch.device,
+) -> dict[str, torch.Tensor]:
+    """Apply the model chat template to an exact prompt and image."""
+    messages = build_text_messages(image, prompt)
+    return prepare_messages_inputs(processor, messages=messages, device=device)
+
+
+def prepare_messages_inputs(
+    processor: Any,
+    *,
+    messages: list[dict[str, Any]],
+    device: torch.device,
+) -> dict[str, torch.Tensor]:
+    """Tokenize prepared Qwen messages and move tensors to one device."""
     encoded = processor.apply_chat_template(
         messages,
         add_generation_prompt=True,

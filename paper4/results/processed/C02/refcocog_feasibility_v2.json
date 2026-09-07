@@ -1,0 +1,32 @@
+{
+  "bbox_schema": "xyxy",
+  "c02_authorized": true,
+  "decision": "GO",
+  "failure_reasons": {
+    "control_failure": 1814
+  },
+  "grounded_expressions": 9606,
+  "grounded_rate": 1.0,
+  "irrelevant_control_success_rate": 0.8111596918592546,
+  "irrelevant_controls_constructed": 7792,
+  "median_area_mismatch": 0.0,
+  "multiple_expression_images": 3360,
+  "multiple_expression_objects": 3718,
+  "p90_area_mismatch": 0.0,
+  "raw_annotation_consistency_rate": 1.0,
+  "refs_parsed": 5000,
+  "schema_samples_checked": 5000,
+  "semantic_counts": {
+    "attribute": 3895,
+    "compositional": 2105,
+    "recognition": 2832,
+    "relational": 3782,
+    "spatial": 2156
+  },
+  "sentence_expressions_parsed": 9606,
+  "stage_a_success": 7792,
+  "stage_b_success": 0,
+  "usable_expressions": 7792,
+  "usable_images": 3621,
+  "xyxy_consistency_rate": 1.0
+}

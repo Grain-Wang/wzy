@@ -1,0 +1,30 @@
+{
+  "dataset": "jxu124/refcocog",
+  "expressions_parsed": 5000,
+  "failure_reasons": {
+    "control_failure": 425,
+    "out_of_bounds": 4137
+  },
+  "grounded_expressions": 863,
+  "grounded_rate": 0.1726,
+  "irrelevant_control_success_rate": 0.507531865585168,
+  "irrelevant_controls_constructed": 438,
+  "median_area_mismatch": 0.0,
+  "multiple_expression_images": 18,
+  "multiple_expression_objects": 0,
+  "p90_area_mismatch": 0.0,
+  "semantic_counts": {
+    "attribute": 469,
+    "compositional": 440,
+    "recognition": 124,
+    "relational": 485,
+    "spatial": 333
+  },
+  "split": "train",
+  "usable_expressions": 438,
+  "usable_images": 430,
+  "stage_a_exact_shape_success": 438,
+  "stage_b_relaxed_success": 0,
+  "decision": "NO-GO",
+  "c02_authorized": false
+}
